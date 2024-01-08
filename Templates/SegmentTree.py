@@ -32,14 +32,22 @@ class SegmentTree:
         self._build_segment_tree(left, right, index)
 
     def _search(self, ql, qr, left, right, index):
+        # leaf node case
+        if left > right or ql > right or qr < left:
+            return 0
+        
+        if left == right:
+            self.segment_array[index] = self.input_array[left]
+            return
+        
+        mid = (left + right) // 2
+        self._build_segment_tree(left, mid, 2*index + 1)
+        self._build_segment_tree(mid + 1, right, 2*index + 2)
 
-        if left > right:
-            return None
-        # Finding the correct range
-        if ql == left and qr == right:
-            return self.segment_array[index]
+        self.segment_array[index] = self.func(self.segment_array[2*index + 1], self.segment_array[2*index + 2])
+        return
         
-        
+
 
     def query(self, ql, qr):
         left = 0
