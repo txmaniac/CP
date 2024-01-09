@@ -41,8 +41,8 @@ class SegmentTree:
             return
         
         mid = (left + right) // 2
-        self._build_segment_tree(left, mid, 2*index + 1)
-        self._build_segment_tree(mid + 1, right, 2*index + 2)
+        self._search(ql, qr, left, mid, 2 * index + 1)
+        self._search(ql, qr, left, mid + 1, 2 * index + 2)
 
         self.segment_array[index] = self.func(self.segment_array[2*index + 1], self.segment_array[2*index + 2])
         return
