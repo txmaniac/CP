@@ -21,3 +21,29 @@ class Solution:
                 lengths[i] = 1 + temp
 
         return max(lengths)
+
+# Optimal solution O(nlogn)
+
+from bisect import bisect_left
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+
+        sorted_list = []
+        
+        # idea is to find the sequence in nums wherein every num we visit sequentially is placed at the end of the sorted_list
+        # In case if the index is not at the end of the sorted_list
+        # it means that we have a subsequence with lower values
+        # so we replace the values at the indexes
+        # NOTE: Here we don't remove any added values to list
+        # so if new values come in, then only max value is affected
+
+        for num in nums:
+            index = bisect_left(sorted_list, num)
+
+            if index == len(sorted_list):
+                sorted_list.append(num)
+
+            else:
+                sorted_list[index] = num
+
+        return len(sorted_list)
