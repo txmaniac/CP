@@ -14,7 +14,11 @@ class Solution:
 
             if 0 <= j < n:
                 # choose three possibilities
-                cache[(i,j)] = matrix[i][j] + min(minPathSum(i + 1, j - 1), minPathSum(i + 1, j), minPathSum(i + 1, j + 1))
+                cache[(i,j)] = matrix[i][j] + min(
+                    minPathSum(i + 1, j - 1), 
+                    minPathSum(i + 1, j),
+                    minPathSum(i + 1, j + 1)
+                )
                 return cache[(i,j)]
             
             return INF
